@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">BlViewer</string>
+    <string name="pic_album">图集</string>
+    <string name="search">搜索</string>
+    <string name="aidol">Aidol</string>
+    <string name="magazine">Magazine</string>
+    <string name="thailand_sexy">Thailand Sexy</string>
+    <string name="chinese_sexy">Chinese Sexy</string>
+    <string name="american">American</string>
+    <string name="japan">Japan</string>
+    <string name="china">China</string>
+    <string name="taiwan">Taiwan(China)</string>
+    <string name="thailand">Thailand</string>
+    <string name="korea">Korea</string>
+    <string name="personal_center">个人中心</string>
+    <string name="bl_search">BlSearch</string>
+    <string name="normal_search">普通搜索</string>
+    <string name="tag_search">TAG搜索</string>
+    <string name="actor_search">艺人搜索</string>
+    <string name="publication_search">出版商搜索</string>
+    <string name="input_search_key">请输入关键字</string>
+    <string name="download">下载</string>
+    <string name="watch">观看</string>
+    <string name="pic_view_position">%d of %d</string>
+</resources>

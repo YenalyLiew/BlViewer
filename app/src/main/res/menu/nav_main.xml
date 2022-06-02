@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_pic_album"
+        android:icon="@drawable/ic_baseline_photo_library_24"
+        android:title="@string/pic_album" />
+
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/nav_personal_center"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/personal_center" />
+
+</menu>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/normal_search"
+        android:title="@string/normal_search" />
+    <item
+        android:id="@+id/tag_search"
+        android:title="@string/tag_search" />
+    <item
+        android:id="@+id/actor_search"
+        android:title="@string/actor_search" />
+    <item
+        android:id="@+id/publication_search"
+        android:title="@string/publication_search" />
+</menu>
