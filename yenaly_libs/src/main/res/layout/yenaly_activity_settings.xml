@@ -17,7 +17,7 @@
             android:background="?attr/colorPrimaryVariant"
             android:theme="@style/ThemeOverlay.Material3.Dark"
             app:popupTheme="@style/ThemeOverlay.Material3.Light"
-            app:title="@string/settings" />
+            app:title="@string/yenaly_settings" />
 
         <FrameLayout
             android:id="@+id/settings_container_view"

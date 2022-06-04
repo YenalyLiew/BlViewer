@@ -1,6 +1,7 @@
+@file:JvmName("ViewUtil")
 @file:Suppress("unused")
 
-package com.yenaly.yenaly_libs.utils
+package com.yenaly.yenaly_libs.utils.view
 
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams

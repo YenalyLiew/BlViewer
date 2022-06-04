@@ -14,15 +14,16 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
+import com.yenaly.blviewer.R
 import com.yenaly.blviewer.databinding.ActivityPicDetailBinding
-import com.yenaly.blviewer.logic.ALBUM_TITLE
-import com.yenaly.blviewer.logic.LEG_CODE
-import com.yenaly.blviewer.logic.TO_PIC_VIEW_POSITION
-import com.yenaly.blviewer.logic.TO_PIC_VIEW_URLS
+import com.yenaly.blviewer.logic.*
 import com.yenaly.blviewer.ui.adapter.PicDetailRvAdapter
 import com.yenaly.blviewer.ui.viewmodel.PicDetailViewModel
 import com.yenaly.yenaly_libs.base.YenalyActivity
+import com.yenaly.yenaly_libs.utils.copyToClipboard
 import com.yenaly.yenaly_libs.utils.intentExtra
 import com.yenaly.yenaly_libs.utils.setSystemBarIconLightMode
 import com.yenaly.yenaly_libs.utils.startActivity
@@ -90,6 +91,15 @@ class PicDetailActivity : YenalyActivity<ActivityPicDetailBinding, PicDetailView
                     binding.albumTitle.text = picInfo.title
                     binding.albumTitleTop.text = picInfo.title
                 }
+                binding.tagCardView.isInvisible = false
+                if (binding.tagGroup.childCount == 0) {
+                    binding.tagGroup.createChips(picInfo.tags,
+                        onLongClick = { _, text ->
+                            text.copyToClipboard()
+                            Toast.makeText(this, "$APP_NAME: TAG已复制到剪切板", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
                 Glide.with(this).load(picInfo.pic[0].url)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .listener(object : RequestListener<Drawable> {
@@ -136,5 +146,22 @@ class PicDetailActivity : YenalyActivity<ActivityPicDetailBinding, PicDetailView
                 }
             }
         })
+    }
+
+    private fun ChipGroup.createChips(
+        texts: List<String>,
+        onClick: ((Chip, String) -> Unit)? = null,
+        onLongClick: ((Chip, String) -> Unit)? = null
+    ) {
+        for (text in texts) {
+            val chipView = layoutInflater.inflate(R.layout.item_tag_chip, this, false) as Chip
+            chipView.text = text
+            chipView.setOnClickListener { onClick?.invoke(it as Chip, text) }
+            chipView.setOnLongClickListener {
+                onLongClick?.invoke(it as Chip, text)
+                true
+            }
+            binding.tagGroup.addView(chipView)
+        }
     }
 }

@@ -1,4 +1,5 @@
 @file:JvmName("ViewPagerUtil")
+@file:Suppress("deprecation")
 
 package com.yenaly.yenaly_libs.utils.view
 
@@ -19,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *
  * @author Yenaly Liew
  */
+@Deprecated("use BottomNavigationViewMediator instead.")
 @JvmOverloads
 fun ViewPager2.setUpWithBottomNavigationView(
     bnv: BottomNavigationView,
@@ -81,6 +83,7 @@ inline var ViewPager2.realOverScrollMode: Int
         }
     }
 
+@Deprecated("use BottomNavigationViewMediator instead.")
 interface OnFragmentSelectedListener {
     fun onFragmentSelected(currentFragment: Fragment)
 }

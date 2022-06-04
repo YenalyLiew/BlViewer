@@ -22,13 +22,13 @@ abstract class FrameActivity : AppCompatActivity() {
 
     @JvmOverloads
     fun showLoadingDialog(
-        loadingText: String = getString(R.string.loading),
+        loadingText: String = getString(R.string.yenaly_loading),
         cancelable: Boolean = false,
         dialogWidth: Int = 260.dp,
         dialogHeight: Int = ViewGroup.LayoutParams.WRAP_CONTENT
     ) {
         val loadingDialogView =
-            LayoutInflater.from(this).inflate(R.layout.dialog_yenaly_loading, null)
+            LayoutInflater.from(this).inflate(R.layout.yenaly_dialog_loading, null)
         loadingDialogView.findViewById<TextView>(R.id.loading_text).text = loadingText
         loadingDialog = MaterialAlertDialogBuilder(this)
             .setCancelable(cancelable)

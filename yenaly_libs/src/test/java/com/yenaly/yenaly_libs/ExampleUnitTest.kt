@@ -32,11 +32,7 @@ class ExampleUnitTest {
         val playCount1 = 785L
         val playCount2 = 5678L
         val playCount3 = 46463L
-        val format1 = TextUtil.toPlayCountCase(playCount1)
-        val format2 = TextUtil.toPlayCountCase(playCount2)
         val format3 = playCount3.toPlayCountCase()
-        println(format1)
-        println(format2)
         println(format3)
     }
 
@@ -52,10 +48,5 @@ class ExampleUnitTest {
         println(case3.secondToTimeCase())
         println(case4.secondToTimeCase())
         println(case5.secondToTimeCase())
-    }
-
-    @Test
-    fun pinyin_test() {
-        println("音乐".toPinyin(" "))
     }
 }

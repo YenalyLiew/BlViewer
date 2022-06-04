@@ -17,17 +17,19 @@ import com.yenaly.yenaly_libs.utils.dp
  */
 abstract class FrameFragment : Fragment() {
 
+    val window get() = requireActivity().window
+
     private lateinit var loadingDialog: AlertDialog
 
     @JvmOverloads
     fun showLoadingDialog(
-        loadingText: String = getString(R.string.loading),
+        loadingText: String = getString(R.string.yenaly_loading),
         cancelable: Boolean = false,
         dialogWidth: Int = 260.dp,
         dialogHeight: Int = ViewGroup.LayoutParams.WRAP_CONTENT
     ) {
         val loadingDialogView =
-            LayoutInflater.from(activity).inflate(R.layout.dialog_yenaly_loading, null)
+            LayoutInflater.from(activity).inflate(R.layout.yenaly_dialog_loading, null)
         loadingDialogView.findViewById<TextView>(R.id.loading_text).text = loadingText
         loadingDialog = MaterialAlertDialogBuilder(requireContext())
             .setCancelable(cancelable)

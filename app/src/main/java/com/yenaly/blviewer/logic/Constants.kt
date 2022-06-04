@@ -12,6 +12,9 @@ const val ALBUM_COVER = "album_cover"
 const val TO_PIC_VIEW_POSITION = "pic_view_position"
 const val TO_PIC_VIEW_URLS = "pic_view_urls"
 
+// 指从tag跳转到搜索界面
+const val TAG_SKIP = "tag_skip"
+
 const val TO_PARTITION = "which"
 const val AIDOL = 0
 const val MAGAZINE = 1

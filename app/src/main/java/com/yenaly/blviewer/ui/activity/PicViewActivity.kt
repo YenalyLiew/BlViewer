@@ -48,7 +48,11 @@ class PicViewActivity : YenalyActivity<ActivityPicViewBinding, PicViewViewModel>
                 }
             }
         )
-        binding.btnBack.setOnClickListener { finish() }
+
+        binding.btnBack.setOnClickListener {
+            finish()
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
     }
 
     override fun onBackPressed() {

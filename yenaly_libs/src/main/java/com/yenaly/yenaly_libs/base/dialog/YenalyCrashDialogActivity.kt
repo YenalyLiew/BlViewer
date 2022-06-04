@@ -36,13 +36,13 @@ class YenalyCrashDialogActivity : YenalyActivity<YenalyCrashDialogDataBinding, Y
             yenalyThrowable.text()
         }
         MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.error_title)
+            .setTitle(R.string.yenaly_error_title)
             .setMessage(info)
             .setCancelable(false)
-            .setPositiveButton(R.string.restart_app) { _, _ ->
+            .setPositiveButton(R.string.yenaly_restart_app) { _, _ ->
                 ActivitiesManager.restartAppWithKillingProcess()
             }
-            .setNegativeButton(R.string.exit_app) { _, _ ->
+            .setNegativeButton(R.string.yenaly_exit_app) { _, _ ->
                 ActivitiesManager.exitAppWithKillingProcess()
             }
             .show()

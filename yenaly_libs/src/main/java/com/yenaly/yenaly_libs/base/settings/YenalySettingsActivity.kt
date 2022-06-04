@@ -28,7 +28,7 @@ abstract class YenalySettingsActivity<VM : YenalyViewModel>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_yenaly_settings)
+        binding = DataBindingUtil.setContentView(this, R.layout.yenaly_activity_settings)
         binding.lifecycleOwner = this
         supportActionBar?.hide()
         setSupportActionBar(binding.settingsToolbar)
