@@ -15,17 +15,25 @@ import com.google.android.material.navigation.NavigationBarView
  * Instantiating a BottomNavigationViewMediator will only create the mediator object,
  * you must call [attach] on it first to link the BottomNavigationView and the ViewPager2 together.
  *
- * @ProjectName : BlViewer
- * @Author : Yenaly Liew
+ * @param fragmentActivity (optional)
+ * @param bottomNavigationView
+ * @param viewPager2
+ * @param itemIdWithFragmentList fragment item id with fragment list
+ * @param slide if ViewPager2 needs to slide
+ * @param smoothScroll if ViewPager2 scrolls smoothly when BottomNavView is selected
+ *
+ * @author Yenaly Liew
  * @Time : 2022/06/03 003 11:21
  * @Description : Description...
  */
 @Suppress("unused")
 class BottomNavigationViewMediator @JvmOverloads constructor(
+    private val fragmentActivity: FragmentActivity,
     private val bottomNavigationView: BottomNavigationView,
     private val viewPager2: ViewPager2,
     private val itemIdWithFragmentList: List<Pair<Int, Fragment>>,
-    private val smoothScroll: Boolean = true
+    var slide: Boolean = true,
+    var smoothScroll: Boolean = true
 ) {
 
     var currentFragment: Fragment? = null
@@ -42,12 +50,27 @@ class BottomNavigationViewMediator @JvmOverloads constructor(
     private var onItemSelectedListener: NavigationBarView.OnItemSelectedListener? = null
     private var onPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
 
+    @JvmOverloads
+    constructor(
+        bottomNavigationView: BottomNavigationView,
+        viewPager2: ViewPager2,
+        itemIdWithFragmentList: List<Pair<Int, Fragment>>,
+        slide: Boolean = true,
+        smoothScroll: Boolean = true
+    ) : this(
+        viewPager2.context as? FragmentActivity
+            ?: throw IllegalStateException("context cannot be cast to FragmentActivity!"),
+        bottomNavigationView,
+        viewPager2,
+        itemIdWithFragmentList,
+        slide,
+        smoothScroll
+    )
+
     fun attach(): BottomNavigationViewMediator {
         if (attached) {
             throw IllegalStateException("${javaClass.simpleName} is already attached")
         }
-        val fragmentActivity = bottomNavigationView.context as? FragmentActivity
-            ?: throw IllegalStateException("context cannot cast to FragmentActivity!")
         viewPager2Adapter = object : FragmentStateAdapter(fragmentActivity) {
             override fun getItemCount(): Int {
                 return itemIdWithFragmentList.size
@@ -68,9 +91,10 @@ class BottomNavigationViewMediator @JvmOverloads constructor(
 
         onItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
             val currentItem = itemIdWithIndexMap[item.itemId]!!
+            currentFragment?.view?.clearFocus()
             viewPager2.setCurrentItem(currentItem, smoothScroll)
             currentFragment = itemIdWithFragmentList[currentItem].second
-            listener?.onFragmentSelected(itemIdWithFragmentList[currentItem].second)
+            // listener?.onFragmentSelected(itemIdWithFragmentList[currentItem].second)
             true
         }
         onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
@@ -83,6 +107,7 @@ class BottomNavigationViewMediator @JvmOverloads constructor(
             }
         }
 
+        viewPager2.isUserInputEnabled = slide
         viewPager2.adapter = viewPager2Adapter
         bottomNavigationView.setOnItemSelectedListener(onItemSelectedListener!!)
         viewPager2.registerOnPageChangeCallback(onPageChangeCallback!!)
@@ -90,6 +115,11 @@ class BottomNavigationViewMediator @JvmOverloads constructor(
         return this
     }
 
+    /**
+     * call this to jump to specific fragment
+     *
+     * @return fragment
+     */
     @JvmOverloads
     fun jumpToFragment(@IdRes fragmentItemId: Int, smoothScroll: Boolean = false): Fragment {
         if (onItemSelectedListener == null || onPageChangeCallback == null) {
@@ -107,6 +137,15 @@ class BottomNavigationViewMediator @JvmOverloads constructor(
 
     fun setOnFragmentSelectedListener(listener: OnFragmentSelectedListener) {
         this.listener = listener
+    }
+
+    // for kotlin
+    inline fun setOnFragmentSelectedListener(crossinline listener: (currentFragment: Fragment) -> Unit) {
+        setOnFragmentSelectedListener(object : OnFragmentSelectedListener {
+            override fun onFragmentSelected(currentFragment: Fragment) {
+                listener.invoke(currentFragment)
+            }
+        })
     }
 
     /**

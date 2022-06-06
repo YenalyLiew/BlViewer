@@ -35,7 +35,7 @@ class MainActivity : YenalyActivity<ActivityMainBinding, MainViewModel>() {
                 R.id.nav_pic_album to MainFragment(),
                 R.id.nav_search to SearchFragment(),
                 R.id.nav_personal_center to PersonalCenterFragment()
-            )
+            ), slide = false, smoothScroll = false
         ).attach()
     }
 
